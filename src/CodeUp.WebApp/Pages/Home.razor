@@ -1,0 +1,76 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<MudContainer Class="mt-16">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Subscriptions</MudText>
+    <MudText Align="Align.Center">Master .NET programming and take your career to the next level!</MudText>
+    <MudGrid Class="mt-8">
+        <MudItem xs="12" sm="6" md="6">
+            <MudCard Elevation="25" Class="rounded-lg pb-4">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5" Align="Align.Center">6-Month Plan</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    <div class="d-flex justify-center">
+                        <MudText Typo="Typo.h3">$500</MudText>
+                        <MudText Typo="Typo.h5" Class="ml-1 mt-5" Color="Color.Secondary">/6 months</MudText>
+                    </div>
+                    <MudText Align="Align.Center" Color="Color.Secondary">Up to 6 installments</MudText>
+                    <MudList T="string" Class="mx-auto mt-4" Style="width:300px;">
+                        <MudListItem Icon="@Icons.Material.Filled.CheckCircle">
+                            Full access to all courses
+                        </MudListItem>
+                        <MudListItem Icon="@Icons.Material.Filled.CheckCircle">
+                            Exclusive content and exercises
+                        </MudListItem>
+                        <MudListItem Icon="@Icons.Material.Filled.CheckCircle">
+                            Certificate of completion
+                        </MudListItem>
+                        <MudListItem Icon="@Icons.Material.Filled.Cancel">
+                            Priority support
+                        </MudListItem>
+                    </MudList>
+                </MudCardContent>
+                <MudCardActions Class="d-flex justify-center">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">Subscribe Now</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="6">
+            <MudCard Elevation="25" Class="rounded-lg pb-4">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5" Align="Align.Center">1-Year Plan</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    <div class="d-flex justify-center">
+                        <MudText Typo="Typo.h3">$800</MudText>
+                        <MudText Typo="Typo.h5" Class="ml-1 mt-5" Color="Color.Secondary">/year</MudText>
+                    </div>
+                    <MudText Align="Align.Center" Color="Color.Secondary">Up to 12 installments</MudText>
+                    <MudList T="string" Class="mx-auto mt-4" Style="width:300px;">
+                        <MudListItem Icon="@Icons.Material.Filled.CheckCircle">
+                            Full access to all courses
+                        </MudListItem>
+                        <MudListItem Icon="@Icons.Material.Filled.CheckCircle">
+                            Exclusive content and exercises
+                        </MudListItem>
+                        <MudListItem Icon="@Icons.Material.Filled.CheckCircle">
+                            Certificate of completion
+                        </MudListItem>
+                        <MudListItem Icon="@Icons.Material.Filled.Star">
+                            Priority support
+                        </MudListItem>
+                    </MudList>
+                </MudCardContent>
+                <MudCardActions Class="d-flex justify-center">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">Subscribe Now</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</MudContainer>

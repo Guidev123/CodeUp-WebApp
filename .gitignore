@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/src/CodeUp.WebApp/wwwroot/appsettings.json
+/src/CodeUp.WebApp/wwwroot/Images/logo.jpg

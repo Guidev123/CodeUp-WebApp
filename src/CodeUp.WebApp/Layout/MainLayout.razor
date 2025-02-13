@@ -10,7 +10,7 @@
         <MudIconButton Color="Color.Inherit" Edge="Edge.Start" OnClick="ToggleDrawer" /> CodeUp Academy <MudSpacer />
         <MudMenu AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" ActivationEvent="@MouseEvent.MouseOver">
             <ActivatorContent>
-                <MudButton Variant="Variant.Text" Color="Color.Primary">Account</MudButton>
+                <MudButton Variant="Variant.Text" Color="Color.Primary" StartIcon="@Icons.Material.Outlined.ManageAccounts">Account</MudButton>
             </ActivatorContent>
             <ChildContent>
                 <MudMenuItem Label="Login" OnClick="NavigateToLogin" />

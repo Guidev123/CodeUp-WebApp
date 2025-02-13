@@ -1,13 +1,19 @@
-﻿using CodeUp.WebApp.Services.Authentication;
+﻿using CodeUp.WebApp.Security.Token;
+using CodeUp.WebApp.Services.Authentication;
 using CodeUp.WebApp.ViewModels;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
+using System.Text.Json;
 
 namespace CodeUp.WebApp.Pages.Authentication;
 
 public partial class RegisterPage : ComponentBase
 {
+
+    [Inject]
+    public ITokenService TokenService { get; set; } = default!;
+
     [Inject]
     public AuthenticationStateProvider AuthenticationStateProvider { get; set; } = default!;
 
@@ -39,9 +45,13 @@ public partial class RegisterPage : ComponentBase
 
         try
         {
+            var json = JsonSerializer.Serialize(InputModel);
             var result = await UserService.RegisterAsync(InputModel);
             if (result.IsSuccess)
+            {
+                await TokenService.SetToken(result.Data!.AccessToken);
                 NavigationManager.NavigateTo("/");
+            }
             else
             {
                 foreach (var item in result.Errors!)

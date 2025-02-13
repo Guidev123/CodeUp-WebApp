@@ -36,8 +36,6 @@ namespace CodeUp.WebApp.ViewModels
         public string ConfirmPassword { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Birth Date is required.")]
-        [DataType(DataType.Date, ErrorMessage = "Invalid Date.")]
-        [Range(typeof(DateTime), "1/1/1900", "12/31/2023", ErrorMessage = "Birth Date must be a valid date.")]
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
     }
 }

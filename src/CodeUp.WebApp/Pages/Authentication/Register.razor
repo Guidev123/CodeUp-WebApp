@@ -13,36 +13,28 @@
             <h1 class="d-flex justify-center">CodeUp Academy</h1>
 
             <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
-
                 <ValidationSummary />
                 <DataAnnotationsValidator />
 
-                <MudTextField Variant="Variant.Outlined" T="string" Label="First Name" HelperText="Required Field" InputType="InputType.Text" For="@(() => InputModel.FirstName)" @bind-Value="InputModel.FirstName" />
-                <MudTextField Variant="Variant.Outlined" T="string" Label="Last Name" HelperText="Required Field" InputType="InputType.Text" For="@(() => InputModel.LastName)" @bind-Value="InputModel.LastName" />
-                <MudTextField Variant="Variant.Outlined" T="string" Label="E-mail" HelperText="Required Field" InputType="InputType.Email" For="@(() => InputModel.Email)" @bind-Value="InputModel.Email" />
-                <MudTextField Variant="Variant.Outlined" T="string" Label="Document" HelperText="Required Field" InputType="InputType.Text" For="@(() => InputModel.Document)" @bind-Value="InputModel.Document" />
-                <MudTextField Variant="Variant.Outlined" T="string" Label="Phone" HelperText="Required Field" InputType="InputType.Telephone" For="@(() => InputModel.Phone)" @bind-Value="InputModel.Phone" />
-                <MudTextField Variant="Variant.Outlined" T="DateTime" Label="Birth Date" HelperText="Required Field" InputType="InputType.Date" For="@(() => InputModel.BirthDate)" @bind-Value="InputModel.BirthDate" />
+                <MudTextField Class="mb-4" Variant="Variant.Outlined" T="string" Label="First Name" HelperText="Required Field" InputType="InputType.Text" For="@(() => InputModel.FirstName)" @bind-Value="InputModel.FirstName" />
+                <MudTextField Class="mb-4" Variant="Variant.Outlined" T="string" Label="Last Name" HelperText="Required Field" InputType="InputType.Text" For="@(() => InputModel.LastName)" @bind-Value="InputModel.LastName" />
+                <MudTextField Class="mb-4" Variant="Variant.Outlined" T="string" Label="E-mail" HelperText="Required Field" InputType="InputType.Email" For="@(() => InputModel.Email)" @bind-Value="InputModel.Email" />
+                <MudTextField Class="mb-4" Variant="Variant.Outlined" T="string" Label="Document" HelperText="Required Field" InputType="InputType.Text" For="@(() => InputModel.Document)" @bind-Value="InputModel.Document" />
+                <MudTextField Class="mb-4" Variant="Variant.Outlined" T="string" Label="Phone" HelperText="Required Field" InputType="InputType.Telephone" For="@(() => InputModel.Phone)" @bind-Value="InputModel.Phone" />
+                <MudDatePicker Class="mb-4" Label="Birth Date" @bind-Date="@InputModel.BirthDate" Format="dd/MM/yyyy" Variant="Variant.Outlined" />
 
-                <MudFileUpload T="IBrowserFile" FilesChanged="UploadFilesAsync">
+                <MudFileUpload T="IBrowserFile" FilesChanged="UploadFilesAsync" Class="mb-4">
                     <ActivatorContent>
-                        <MudButton Variant="Variant.Filled"
+                        <MudButton Variant="Variant.Outlined"
                                    Color="Color.Primary"
-                                   StartIcon="@Icons.Material.Filled.PhotoCamera">
-                                   Profile Picture
+                                   StartIcon="@Icons.Material.Filled.InsertPhoto">
+                            Profile Picture
                         </MudButton>
                     </ActivatorContent>
                 </MudFileUpload>
 
-                @if (!string.IsNullOrEmpty(InputModel.ProfilePicture))
-                {
-                    <div class="d-flex justify-center mt-2">
-                        <img src="@InputModel.ProfilePicture" alt="Profile Picture" width="150" class="rounded-circle" />
-                    </div>
-                }
-
-                <MudTextField Variant="Variant.Outlined" T="string" Label="Password" HelperText="Required Field" InputType="InputType.Password" For="@(() => InputModel.Password)" @bind-Value="InputModel.Password" />
-                <MudTextField Variant="Variant.Outlined" T="string" Label="Confirm Password" HelperText="Required Field" InputType="InputType.Password" For="@(() => InputModel.Password)" @bind-Value="InputModel.ConfirmPassword" />
+                <MudTextField Class="mb-4" Variant="Variant.Outlined" T="string" Label="Password" HelperText="Required Field" InputType="InputType.Password" For="@(() => InputModel.Password)" @bind-Value="InputModel.Password" />
+                <MudTextField Class="mb-4" Variant="Variant.Outlined" T="string" Label="Confirm Password" HelperText="Required Field" InputType="InputType.Password" For="@(() => InputModel.ConfirmPassword)" @bind-Value="InputModel.ConfirmPassword" />
 
                 <div class="d-flex mt-8">
                     @if (IsBusy)
@@ -57,6 +49,7 @@
                     }
                 </div>
             </EditForm>
+
         </MudPaper>
     </MudItem>
 </MudGrid>
@@ -64,6 +57,7 @@
 @code {
     private async Task UploadFilesAsync(IBrowserFile file)
     {
+        var image = file;
         if (file != null)
         {
             using var stream = file.OpenReadStream(maxAllowedSize: 5 * 1024 * 1024);

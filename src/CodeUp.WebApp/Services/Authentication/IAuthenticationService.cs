@@ -5,6 +5,6 @@ namespace CodeUp.WebApp.Services.Authentication;
 
 public interface IAuthenticationService
 {
-    Task<Response<string>> LoginAsync(LoginViewModel login);
-    Task<Response<string>> RegisterAsync(RegisterViewModel register);
+    Task<Response<LoginResponseViewModel>> LoginAsync(LoginViewModel login);
+    Task<Response<LoginResponseViewModel>> RegisterAsync(RegisterViewModel register);
 }

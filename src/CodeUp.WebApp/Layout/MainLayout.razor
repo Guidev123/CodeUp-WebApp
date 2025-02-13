@@ -5,11 +5,18 @@
 <MudDialogProvider />
 <MudSnackbarProvider />
 
-
 <MudLayout>
     <MudAppBar>
         <MudIconButton Color="Color.Inherit" Edge="Edge.Start" OnClick="ToggleDrawer" /> CodeUp Academy <MudSpacer />
-        <MudSpacer />
+        <MudMenu AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" ActivationEvent="@MouseEvent.MouseOver">
+            <ActivatorContent>
+                <MudButton Variant="Variant.Text" Color="Color.Primary">Account</MudButton>
+            </ActivatorContent>
+            <ChildContent>
+                <MudMenuItem Label="Login" OnClick="NavigateToLogin" />
+                <MudMenuItem Label="Register" OnClick="NavigateToRegister" />
+            </ChildContent>
+        </MudMenu>
     </MudAppBar>
     <MudMainContent>
         <MudContainer Class="mt-4">
@@ -20,6 +27,9 @@
 
 @code
 {
+    [Inject]
+    public NavigationManager Navigation { get; set; } = default!;
+
     private bool _isDrawerOpened = true;
     private MudThemeProvider _mudThemeProvider = null!;
     private bool _isDarkMode = true;
@@ -27,5 +37,15 @@
     private void ToggleDrawer()
     {
         _isDrawerOpened = !_isDrawerOpened;
+    }
+
+    private void NavigateToLogin()
+    {
+        Navigation.NavigateTo("/login");
+    }
+
+    private void NavigateToRegister()
+    {
+        Navigation.NavigateTo("/register");
     }
 }

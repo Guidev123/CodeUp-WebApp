@@ -363,3 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 /src/CodeUp.WebApp/wwwroot/appsettings.json
 /src/CodeUp.WebApp/wwwroot/Images/logo.jpg
+/src/CodeUp.WebApp/wwwroot/Images/dotnetthumb.png
+/src/CodeUp.WebApp/wwwroot/Images/leetcodethumb.png

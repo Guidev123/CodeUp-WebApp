@@ -19,19 +19,29 @@
                 <MudTextField Class="mb-4" Variant="Variant.Outlined" T="string" Label="First Name" HelperText="Required Field" InputType="InputType.Text" For="@(() => InputModel.FirstName)" @bind-Value="InputModel.FirstName" />
                 <MudTextField Class="mb-4" Variant="Variant.Outlined" T="string" Label="Last Name" HelperText="Required Field" InputType="InputType.Text" For="@(() => InputModel.LastName)" @bind-Value="InputModel.LastName" />
                 <MudTextField Class="mb-4" Variant="Variant.Outlined" T="string" Label="E-mail" HelperText="Required Field" InputType="InputType.Email" For="@(() => InputModel.Email)" @bind-Value="InputModel.Email" />
-                <MudTextField Class="mb-4" Variant="Variant.Outlined" T="string" Label="Document" HelperText="Required Field" InputType="InputType.Text" For="@(() => InputModel.Document)" @bind-Value="InputModel.Document" />
-                <MudTextField Class="mb-4" Variant="Variant.Outlined" T="string" Label="Phone" HelperText="Required Field" InputType="InputType.Telephone" For="@(() => InputModel.Phone)" @bind-Value="InputModel.Phone" />
-                <MudDatePicker Class="mb-4" Label="Birth Date" @bind-Date="@InputModel.BirthDate" Format="dd/MM/yyyy" Variant="Variant.Outlined" />
 
-                <MudFileUpload T="IBrowserFile" FilesChanged="UploadFilesAsync" Class="mb-4">
-                    <ActivatorContent>
-                        <MudButton Variant="Variant.Outlined"
-                                   Color="Color.Primary"
-                                   StartIcon="@Icons.Material.Filled.InsertPhoto">
-                            Profile Picture
-                        </MudButton>
-                    </ActivatorContent>
-                </MudFileUpload>
+                <MudTextField Class="mb-4"
+                              Variant="Variant.Outlined"
+                              T="string"
+                              Label="Document"
+                              HelperText="Required Field"
+                              InputType="InputType.Text"
+                              For="@(() => InputModel.Document)"
+                              @bind-Value="InputModel.Document"
+                              Mask="@(new PatternMask("00000000000"))" />
+
+                <MudTextField Class="mb-4"
+                              Variant="Variant.Outlined"
+                              T="string"
+                              Label="Phone"
+                              HelperText="Required Field"
+                              InputType="InputType.Telephone"
+                              For="@(() => InputModel.Phone)"
+                              @bind-Value="InputModel.Phone"
+                              Mask="@(new PatternMask("(00) 00000-0000"))" />
+
+
+                <MudDatePicker Class="mb-4" Label="Birth Date" @bind-Date="@InputModel.BirthDate" Format="dd/MM/yyyy" Variant="Variant.Outlined" />
 
                 <MudTextField Class="mb-4" Variant="Variant.Outlined" T="string" Label="Password" HelperText="Required Field" InputType="InputType.Password" For="@(() => InputModel.Password)" @bind-Value="InputModel.Password" />
                 <MudTextField Class="mb-4" Variant="Variant.Outlined" T="string" Label="Confirm Password" HelperText="Required Field" InputType="InputType.Password" For="@(() => InputModel.ConfirmPassword)" @bind-Value="InputModel.ConfirmPassword" />
@@ -53,17 +63,3 @@
         </MudPaper>
     </MudItem>
 </MudGrid>
-
-@code {
-    private async Task UploadFilesAsync(IBrowserFile file)
-    {
-        var image = file;
-        if (file != null)
-        {
-            using var stream = file.OpenReadStream(maxAllowedSize: 5 * 1024 * 1024);
-            using var memoryStream = new MemoryStream();
-            await stream.CopyToAsync(memoryStream);
-            InputModel.ProfilePicture = Convert.ToBase64String(memoryStream.ToArray());
-        }
-    }
-}

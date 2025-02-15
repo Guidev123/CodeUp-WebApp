@@ -4,7 +4,6 @@ using CodeUp.WebApp.ViewModels;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
-using System.Text.Json;
 
 namespace CodeUp.WebApp.Pages.Authentication;
 
@@ -45,12 +44,12 @@ public partial class RegisterPage : ComponentBase
 
         try
         {
-            var json = JsonSerializer.Serialize(InputModel);
             var result = await UserService.RegisterAsync(InputModel);
             if (result.IsSuccess)
             {
                 await TokenService.SetToken(result.Data!.AccessToken);
                 NavigationManager.NavigateTo("/");
+                Snackbar.Add("Welcome!", Severity.Success);
             }
             else
             {
@@ -61,7 +60,6 @@ public partial class RegisterPage : ComponentBase
         catch
         {
             Snackbar.Add("Something has failed", Severity.Error);
-            throw;
         }
         finally
         {

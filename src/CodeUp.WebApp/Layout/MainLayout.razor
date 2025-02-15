@@ -13,8 +13,8 @@
                 <MudButton Variant="Variant.Text" Color="Color.Primary" StartIcon="@Icons.Material.Outlined.ManageAccounts">Account</MudButton>
             </ActivatorContent>
             <ChildContent>
-                <MudMenuItem Label="Login" OnClick="NavigateToLogin" />
-                <MudMenuItem Label="Register" OnClick="NavigateToRegister" />
+                <MudNavLink Href="/">Inicio</MudNavLink>
+                <MudNavLink Href="/register">Register</MudNavLink>
             </ChildContent>
         </MudMenu>
     </MudAppBar>
@@ -24,12 +24,8 @@
         </MudContainer>
     </MudMainContent>
 </MudLayout>
-
 @code
 {
-    [Inject]
-    public NavigationManager Navigation { get; set; } = default!;
-
     private bool _isDrawerOpened = true;
     private MudThemeProvider _mudThemeProvider = null!;
     private bool _isDarkMode = true;
@@ -37,15 +33,5 @@
     private void ToggleDrawer()
     {
         _isDrawerOpened = !_isDrawerOpened;
-    }
-
-    private void NavigateToLogin()
-    {
-        Navigation.NavigateTo("/login");
-    }
-
-    private void NavigateToRegister()
-    {
-        Navigation.NavigateTo("/register");
     }
 }

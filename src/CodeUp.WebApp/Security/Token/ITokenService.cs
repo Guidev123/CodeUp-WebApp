@@ -2,7 +2,7 @@
 
 public interface ITokenService
 {
-    Task<string?> GetToken();
+    Task<string?> GetTokenAsync();
     Task SetToken(string token);
     Task RemoveToken();
 }

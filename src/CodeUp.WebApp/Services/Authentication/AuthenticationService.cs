@@ -9,13 +9,24 @@ public sealed class AuthenticationService(IHttpClientFactory httpClientFactory)
 {
     private readonly HttpClient _client = httpClientFactory.CreateClient(WebConfiguration.HTTP_CLIENT_NAME);
 
+    public async Task<Response<UserViewModel>> GetAsync()
+    {
+        var response = await _client.GetAsync("/api/v1/auth").ConfigureAwait(false);
+
+        var result = await DeserializeObjectResponse<Response<UserViewModel>>(response);
+
+        return response.IsSuccessStatusCode
+            ? new(result!.Data, 200, "Get user successfully") : new(null, 400, "Something failed during your login.", result!.Errors);
+    }
+
     public async Task<Response<LoginResponseViewModel>> LoginAsync(LoginViewModel login)
     {
         var response = await _client.PostAsync("/api/v1/auth/login", GetContent(login)).ConfigureAwait(false);
 
         var result = await DeserializeObjectResponse<Response<LoginResponseViewModel>>(response);
 
-        return result is not null ? result : new(null, 400, "Something failed during your login.");
+        return response.IsSuccessStatusCode
+            ? new(result!.Data, 201, "Login successfully") : new(null, 400, "Something failed during your login.", result!.Errors);
     }
 
     public async Task<Response<LoginResponseViewModel>> RegisterAsync(RegisterViewModel register)
@@ -24,6 +35,7 @@ public sealed class AuthenticationService(IHttpClientFactory httpClientFactory)
 
         var result = await DeserializeObjectResponse<Response<LoginResponseViewModel>>(response);
 
-        return result is not null ? result : new(null, 400, "Something failed during your login.");
+        return response.IsSuccessStatusCode
+            ? new(result!.Data, 201, "Login successfully") : new(null, 400, "Something failed during your login.", result!.Errors);
     }
 }

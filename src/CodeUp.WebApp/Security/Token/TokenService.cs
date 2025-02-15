@@ -6,7 +6,7 @@ public class TokenService(IJSRuntime jsRuntime) : ITokenService
 {
     private readonly IJSRuntime _jsRuntime = jsRuntime;
     private const string TOKEN_KEY = "authToken";
-    public async Task<string?> GetToken()
+    public async Task<string?> GetTokenAsync()
         => await _jsRuntime.InvokeAsync<string>("localStorage.getItem", TOKEN_KEY);
 
     public async Task SetToken(string token)

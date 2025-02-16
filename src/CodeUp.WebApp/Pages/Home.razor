@@ -3,33 +3,50 @@
 <PageTitle>Home</PageTitle>
 
 <MudContainer Class="mt-16 px-8" MaxWidth="MaxWidth.False">
-    <MudGrid>
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="12">
+            <MudPaper Elevation="10" Class="pa-4 text-center">
+                <h2 class="mb-3">About CodeUp Academy</h2>
+                <p class="text-justify">
+                    Our platform is designed to provide aspiring developers with the necessary tools and resources to master .NET development. Whether you're just starting or looking to advance your career, we offer in-depth tutorials, real-world projects, and industry insights that will help you succeed. Join us today and start building the skills you need to create professional applications and become a part of the .NET development community.
+                </p>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+    <BreadcrumbSeparator></BreadcrumbSeparator>
+
+    <MudGrid Justify="Justify.Center" Spacing="3">
         <MudItem xs="12" sm="6">
-            <MudGrid>
-                <MudItem xs="12">
-                    <MudPaper Elevation="2" Class="pa-4" Style="height: 200px;">
-                        <h4>Advanced .NET Techniques</h4>
-                        <p>Learn advanced concepts and best practices from industry experts.</p>
-                    </MudPaper>
-                </MudItem>
-                <MudItem xs="12">
-                    <MudPaper Elevation="2" Class="pa-4" Style="height: 200px;">
-                        <h4>Join a Community</h4>
-                        <p>Collaborate and grow with fellow learners in our supportive community.</p>
-                    </MudPaper>
-                </MudItem>
-            </MudGrid>
+            <MudPaper Elevation="20" Class="pa-3 d-flex flex-column align-items-center" Style="height: 100%;">
+                <h3 class="mb-2 text-center text-md-start">Master Microservices with .NET</h3>
+                <p class="text-justify text-md-start">
+                    Learn how to design, build, and deploy scalable microservices using .NET. This course covers essential concepts like service communication, event-driven systems, and performance optimization to help you become a skilled microservices developer.
+                </p>
+                <br />
+                <div class="w-100 text-center mt-auto">
+                    <a href="/subscriptions/catalog">
+                        <img src="images/micros.png" alt="Learning" class="img-fluid rounded"
+                             style="object-fit: cover; width: 100%; height: 100%; max-height: 500%;">
+                    </a>
+                </div>
+            </MudPaper>
         </MudItem>
 
         <MudItem xs="12" sm="6">
-            <MudPaper Elevation="2" Class="pa-4" Style="height: 100%">
-                <h3>Master .NET Development</h3>
-                <p>With our platform, you will gain the skills to build robust .NET applications and launch your career as a professional developer.</p>
-                <div class="text-center">
-                    <br />
-                    <img src="images/dotnetthumb.png" alt="Learning" style="max-width: 100%; height: auto;" />
+            <MudPaper Elevation="20" Class="pa-3 d-flex flex-column align-items-center" Style="height: 100%;">
+                <h3 class="mb-2 text-center text-md-start">Master .NET Development</h3>
+                <p class="text-justify text-md-start">
+                    Fundamentals and advanced techniques of .NET to build scalable and high-performance applications. This course covers everything from C# basics to complex architecture patterns, preparing you to develop enterprise-level solutions and launch your career as a professional .NET developer.
+                </p>
+                <br />
+                <div class="w-100 text-center mt-auto">
+                    <a href="/subscriptions/catalog">
+                        <img src="images/langcsharp.png" alt="Learning" class="img-fluid rounded"
+                             style="object-fit: cover; width: 100%; height: 100%; max-height: 500%;">
+                    </a>
                 </div>
             </MudPaper>
         </MudItem>
     </MudGrid>
+
 </MudContainer>

@@ -1,4 +1,8 @@
-﻿@inherits LayoutComponentBase
+﻿@using System.Security.Claims
+@using CodeUp.WebApp.Security
+@using Microsoft.AspNetCore.Components.Authorization
+@using CodeUp.WebApp.Security.Token
+@inherits LayoutComponentBase
 
 <MudThemeProvider @ref="_mudThemeProvider" @bind-IsDarkMode="_isDarkMode" />
 <MudPopoverProvider />
@@ -7,31 +11,73 @@
 
 <MudLayout>
     <MudAppBar>
-        <MudIconButton Color="Color.Inherit" Edge="Edge.Start" OnClick="ToggleDrawer" /> CodeUp Academy <MudSpacer />
+        <MudButton Variant="Variant.Text" Href="/" Class="mx-2">
+            Home
+        </MudButton>
+
+        <MudButton Variant="Variant.Text" Href="/subscriptions/catalog" Class="mx-2">
+            Subscriptions
+        </MudButton>
+
+        <MudSpacer/>
+
         <MudMenu AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" ActivationEvent="@MouseEvent.MouseOver">
             <ActivatorContent>
-                <MudButton Variant="Variant.Text" Color="Color.Primary" StartIcon="@Icons.Material.Outlined.ManageAccounts">Account</MudButton>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Outlined.ManageAccounts">Account</MudButton>
             </ActivatorContent>
             <ChildContent>
-                <MudNavLink Href="/">Inicio</MudNavLink>
-                <MudNavLink Href="/register">Register</MudNavLink>
+                @if (!IsAuthenticated)
+                {
+                    <MudNavLink Icon="@Icons.Material.TwoTone.Login" Href="/login">Login</MudNavLink>
+                    <MudNavLink Icon="@Icons.Material.TwoTone.AppRegistration" Href="/register">Register</MudNavLink>
+                }
+                else
+                {
+                    <MudButton Icon="@Icons.Material.TwoTone.Logout" Variant="Variant.Text" Color="Color.Error" OnClick="Logout">Logout</MudButton>
+                }
             </ChildContent>
         </MudMenu>
     </MudAppBar>
+
     <MudMainContent>
         <MudContainer Class="mt-4">
             @Body
         </MudContainer>
     </MudMainContent>
 </MudLayout>
+
 @code
 {
+    [Inject]
+    public IJwtAuthenticationStateProvider JwtAuthenticationStateProvider { get; set; } = default!;
+
+    [Inject]
+    public NavigationManager Navigation { get; set; } = default!;
+
+    [Inject]
+    public ISnackbar Snackbar { get; set; } = default!;
+
     private bool _isDrawerOpened = true;
     private MudThemeProvider _mudThemeProvider = null!;
     private bool _isDarkMode = true;
+    private bool IsAuthenticated { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        IsAuthenticated = await JwtAuthenticationStateProvider.CheckAuthenticatedAsync();
+    }
 
     private void ToggleDrawer()
     {
         _isDrawerOpened = !_isDrawerOpened;
+    }
+
+    private async Task Logout()
+    {
+        await JwtAuthenticationStateProvider.RemoveTokenAsync();
+        IsAuthenticated = false;
+        StateHasChanged();
+        Snackbar.Add("You have successfully disconnected.", Severity.Info);
+        Navigation.NavigateTo("/");
     }
 }

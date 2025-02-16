@@ -26,7 +26,7 @@ public sealed class AuthenticationService(IHttpClientFactory httpClientFactory)
         var result = await DeserializeObjectResponse<Response<LoginResponseViewModel>>(response);
 
         return response.IsSuccessStatusCode
-            ? new(result!.Data, 201, "Login successfully") : new(null, 400, "Something failed during your login.", result!.Errors);
+            ? new(result!.Data, 200, "Login successfully") : new(null, 400, "Something failed during your login.", result!.Errors);
     }
 
     public async Task<Response<LoginResponseViewModel>> RegisterAsync(RegisterViewModel register)

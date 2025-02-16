@@ -1,10 +1,8 @@
-﻿using CodeUp.WebApp.Configurations;
-using CodeUp.WebApp.Responses;
+﻿using CodeUp.WebApp.Responses;
 using CodeUp.WebApp.Security.Token;
 using CodeUp.WebApp.Services.Authentication;
 using CodeUp.WebApp.ViewModels;
 using Microsoft.AspNetCore.Components.Authorization;
-using System.Net.Http.Json;
 using System.Security.Claims;
 
 namespace CodeUp.WebApp.Security;
@@ -21,7 +19,6 @@ public class JwtAuthenticationStateProvider(IAuthenticationService authenticatio
         await GetAuthenticationStateAsync();
         return _isAuthenticated;
     }
-
 
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {
@@ -74,9 +71,9 @@ public class JwtAuthenticationStateProvider(IAuthenticationService authenticatio
         return claims;
     }
 
-    public async Task SetTokenAsync(string token)
+    public async Task SetTokenAsync(string token, string refreshToken)
     {
-        await _tokenService.SetToken(token);
+        await _tokenService.SetToken(token, refreshToken);
         NotifyAuthenticationStateChanged();
     }
 

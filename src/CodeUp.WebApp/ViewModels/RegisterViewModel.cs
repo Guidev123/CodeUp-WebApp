@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CodeUp.WebApp.ViewModels.Validations;
+using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 
 namespace CodeUp.WebApp.ViewModels
 {
@@ -33,6 +35,7 @@ namespace CodeUp.WebApp.ViewModels
         public string ConfirmPassword { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Birth Date is required.")]
+        [AgeValidator(16)]
         public DateTime? BirthDate { get; set; }
     }
 }
